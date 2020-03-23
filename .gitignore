@@ -13,3 +13,4 @@ build*
 *#                                    
 .vs/*
 /bin
+/cmake-build-debug

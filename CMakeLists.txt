@@ -15,6 +15,17 @@ else()
    message(" [INFO] 32 bits build.")
 endif()
 
+# ===>>>> TARGET upscale: Upscale child process
+# Sample application that shows UAC elevation dialog.
+#--------------------------------------------------------------
+add_executable(upscale src/upscale.cpp)
+
+# ===>>>> TARGET gpo: Windows API GPO
+# Sample application that shows GPO settings.
+# Uses: UseEnv API  userenv.dll
+#--------------------------------------------------------------
+add_executable(gpo src/gpo.cpp)
+#target_link_libraries(gpo PUBLIC usrenv)
 
 # ===>>>> TARGET winver: Windows API base 64 facilities    
 # Sample application that shows current Windows installation version.
@@ -25,7 +36,6 @@ add_executable(winver src/windowsVersion.cpp)
 # Sample application that shows current Windows installation version.
 #--------------------------------------------------------------
 add_executable(winhttp src/winhttp.cpp)
-
 
 # ===>>>> TARGET base64: Windows API base 64 facilities    
 # Uses: Wincrypt API  crypt32.dll 
@@ -42,13 +52,13 @@ target_link_libraries(base64 PUBLIC crypt32)
 add_executable(guiBasic1 WIN32 src/guiBasic1.cpp)
 # target_link_libraries(guiBasic1 user32 gdi32)
 
-
 # ====>>>> TARGET: guiBasicNOWinmain - Minimal graphical user interface - WinMain entry point, 
 # Add icon to executable. 
 # icon.rc => Resource script which is compiled by the resource compiler.
 #--------------------------------------------------------------
 add_executable(guiBasicNOWinmain WIN32 src/guiBasicNOWinmain.cpp src/icon.rc)
 # target_link_libraries(guiBasicNOWinmain user32 gdi32)
+
 if(MSVC)
 	set_target_properties(guiBasicNOWinmain PROPERTIES LINK_FLAGS "/entry:mainCRTStartup")
 else()
@@ -58,7 +68,9 @@ endif()
 #==========>>> Helper Targets <<<====================#
 
 # Copy targets to ./ - Directory where is this file CMakeLists.txt (project top level dir)
-install(TARGETS winver 
+install(TARGETS gpo
+		        upscale
+		        winver
 				winhttp 
 				base64 
 				guiBasic1 
