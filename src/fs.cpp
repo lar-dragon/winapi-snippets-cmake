@@ -14,7 +14,7 @@ int main() {
     WCHAR desktop[MAX_PATH];
     SHGetSpecialFolderPath(HWND_DESKTOP, desktop, CSIDL_DESKTOPDIRECTORY, FALSE);
     std::wstring path = std::wstring(desktop) + L"\\test";
-    wprintf(L"The full path name is:  %s\n", path.data());
+    wprintf(L"The full path name is: %s\n", path.data());
     if (GetFileAttributes(path.data()) != INVALID_FILE_ATTRIBUTES) {
         wprintf(L"Path exists\n");
         RmDir(path);
