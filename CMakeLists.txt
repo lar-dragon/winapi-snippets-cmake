@@ -15,6 +15,11 @@ else()
    message(" [INFO] 32 bits build.")
 endif()
 
+# ===>>>> TARGET fs: Fale system
+# Sample application that shows file system operations.
+#--------------------------------------------------------------
+add_executable(fs src/fs.cpp)
+
 # ===>>>> TARGET upscale: Upscale child process
 # Sample application that shows UAC elevation dialog.
 #--------------------------------------------------------------
@@ -68,7 +73,8 @@ endif()
 #==========>>> Helper Targets <<<====================#
 
 # Copy targets to ./ - Directory where is this file CMakeLists.txt (project top level dir)
-install(TARGETS gpo
+install(TARGETS fs
+		        gpo
 		        upscale
 		        winver
 				winhttp 
